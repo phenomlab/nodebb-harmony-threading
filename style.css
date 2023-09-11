@@ -34,7 +34,7 @@
     margin-top: -26px;
   }
   .topic .threaded.sticky-tools {
-    margin: 1em calc(15% - 15vw);
+    margin-left: -8%;
     margin-top: 0px;
     margin-bottom: 0px;
     transition: margin-left 0.3s ease, margin-right 0.3s ease;
