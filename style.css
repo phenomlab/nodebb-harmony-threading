@@ -1,0 +1,166 @@
+  /* Copy all of this into your custom CSS - ACP->admin/appearance/customise#custom-css */
+
+@media (min-width: 1200px) {
+  /* Start of threaded CSS rules */
+  .page-topic .topic .posts.timeline .timeline-event,
+  .page-topic .topic .posts.timeline > [component="post/placeholder"],
+  .page-topic .topic .posts.timeline > [component="post"] {
+    border-left: none;
+    transition: transform 0.3s ease !important;
+    background: var(--bs-body-bg);
+  }
+  ul[component="topic"] {
+    position: relative;
+  }
+  .post-container.threaded {
+    background: var(--bs-body-bg) !important;
+  }
+  ul[component="topic"].threaded:before {
+    border-left: 2px solid var(--bs-border-color);
+    content: " ";
+    position: absolute;
+    height: 100%;
+    display: block;
+    margin-left: 22px;
+    margin-top: -26px;
+  }
+  ul[component="topic"]:before {
+    border-left: 2px solid var(--bs-border-color);
+    content: " ";
+    position: absolute;
+    height: 100%;
+    display: block;
+    margin-left: 22px;
+    margin-top: -26px;
+  }
+  .topic .threaded.sticky-tools {
+    margin: 1em calc(15% - 15vw);
+    margin-top: 0px;
+    margin-bottom: 0px;
+    transition: margin-left 0.3s ease, margin-right 0.3s ease;
+  }
+  .topic .sticky-tools {
+    transition: margin-left 0.3s ease, margin-right 0.3s ease;
+  }
+  .threads-wrapper {
+    display: flex;
+    position: relative;
+    top: -2px;
+  }
+  .form-check.form-switch.sticky-tools-bar {
+    position: relative;
+    top: 3px;
+    left: 10px;
+    padding-right: 15px;
+  }
+  i.fa.fa-fw.fa-bars.left {
+    position: relative;
+    top: 7px;
+    left: 5px;
+  }
+  i.fa.fa-fw.fa-bars-staggered.right {
+    position: relative;
+    top: -1px;
+    left: 0px;
+  }
+  #enableThreading.form-check-input:checked {
+    background-color: var(--bs-link-color);
+    border-color: var(--bs-link-color);
+  }
+  .threaded li.pt-4.threaded:not(:after) {
+    transform: translateX(-90px);
+    transform: translateX(50px);
+    transition: transform 0.3s ease !important;
+  }
+  li.pt-4.self-post:not(.self-post .topic-owner-post).threaded {
+    transform: translateX(0px) !important;
+    transition: transform 0.3s ease !important;
+    background: var(--bs-body-bg);
+    padding-right: 30px;
+  }
+  li.pt-4.topic-owner-post:before.threaded {
+    transform: translateX(29px);
+    transition: transform 0.3s ease !important;
+  }
+  li.pt-4.self-post.topic-owner-post:before.threaded {
+    transform: translateX(73px);
+    transition: transform 0.3s ease !important;
+  }
+  li[component="post"].threaded {
+    transform: translateX(-100px);
+    transition: transform 0.3s ease !important;
+  }
+  li.pt-4.threaded:not(.timeline-event) {
+    margin-bottom: 20px;
+    padding-right: 30px;
+    box-shadow: 0 0 0 1px var(--bs-border-color);
+    transition: margin-bottom 0.3s ease !important;
+  }
+  .page-topic
+    .topic
+    .posts
+    > [component="post"]
+    > [component="post/footer"].threaded {
+    border-bottom: none !important;
+  }
+  /* Here we disable the stock beginning and end of thread :before and :after markers so we can add our own. This prevents CLS */
+  .page-topic .topic .posts.timeline .timeline-event:first-child:before,
+  .page-topic
+    .topic
+    .posts.timeline
+    > [component="post/placeholder"]:first-child:before,
+  .page-topic .topic .posts.timeline > [component="post"]:first-child:before,
+  .page-topic .topic .posts.timeline .timeline-event:last-child:after,
+  .page-topic
+    .topic
+    .posts.timeline
+    > [component="post/placeholder"]:last-child:after,
+  .page-topic .topic .posts.timeline > [component="post"]:last-child:after {
+    display: none;
+  }
+  /* Now we add our own pseudo elements */
+  .posts-container:before {
+    content: "";
+    margin-left: 15px;
+    position: relative;
+    top: 10px;
+    background: var(--bs-border-color);
+    border-radius: 999px;
+    height: 16px;
+    width: 16px;
+    display: flex;
+    z-index: 2;
+  }
+  .posts-container.threaded:before {
+    transform: translateX(0px);
+    transition: transform 0.3s ease !important;
+  }
+  ul[component="topic"]:after {
+    content: "";
+    margin-left: 15px;
+    position: relative;
+    top: 10px;
+    background: var(--bs-border-color);
+    border-radius: 999px;
+    height: 16px;
+    width: 16px;
+    display: flex;
+    z-index: 2;
+  }
+  ul[component="topic"].threaded:after {
+    transform: translateX(0px);
+    transition: transform 0.3s ease !important;
+  }
+  .timeline-event.threaded {
+    transform: translateX(0px);
+    transition: transform 0.3s ease !important;
+  }
+  .page-topic .topic .posts.timeline .timeline-event.highlight,
+  .page-topic .topic .posts.timeline > [component="post/placeholder"].highlight,
+  .page-topic .topic .posts.timeline > [component="post"].highlight {
+    border-left: 2px solid #0d6efd !important;
+    margin-left: 22px;
+    transition: transform 0.3s ease !important;
+  }
+  /* End of threaded CSS rules */
+}
