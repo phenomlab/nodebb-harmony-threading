@@ -1,0 +1,67 @@
+// Copy this into ACP->admin/appearance/customise#custom-js
+
+function threaded() {
+    $(document).ready(function () {
+        // Check if the screen width is 1200px or more
+        if ($(window).width() >= 1200) {
+            // Check if the dropdown already exists
+            if ($('#enableThreading').length === 0) {
+                var threadView = $('<div class="threads-wrapper"><i class="fa fa-fw fa-bars left"></i><form class="form"><div class="form-check form-switch sticky-tools-bar"> \
+                    <input class="form-check-input" id="enableThreading" type="checkbox" data-field="enableThreading"> \
+                    <label class=" d-none d-md-inline fw-semibold" for="enableThreading"><i class="fa fa-fw fa-bars-staggered right"></i></label> \
+                </div></form></div>');
+                $('.topic .sticky-tools ul .hidden-xs').append(threadView);
+                // Check if there's a stored state for the checkbox and update it
+                var storedState = localStorage.getItem('enableThreadingState');
+                if (storedState === 'true') {
+                    $('#enableThreading').prop('checked', true);
+                }
+            }
+            // Toggle the class 'threaded' on or off when the checkbox changes state
+            $('#enableThreading').on('change', function () {
+                var isChecked = $(this).is(':checked');
+                if (isChecked) {
+                    console.log('Thread view is active.');
+                    $('ul[component="topic"]').addClass('threaded');
+                    $('.posts-container').addClass('threaded')
+                    $('ul[component="topic"]').addClass('threaded')
+                    $('.post-container').addClass('threaded')
+                    $('.timeline-event').addClass('threaded')
+                    $('[component="post/footer"]').addClass('threaded');
+                    $('[component="post"]').each(function () {
+                        // Add the 'threaded' class to matching elements
+                        if ($(this).hasClass('pt-4') || $(this).hasClass('self-post')) {
+                            $(this).addClass('threaded');
+                            $('.topic .sticky-tools').addClass('threaded');
+                        }
+                    });
+                } else {
+                    console.log('Thread view is inactive.');
+                    $('[component="post"]').removeClass('threaded');
+                    $('ul[component="topic"]').removeClass('threaded');
+                    $('.posts-container').removeClass('threaded')
+                    $('ul[component="topic"]').removeClass('threaded')
+                    $('.post-container').removeClass('threaded')
+                    $('.timeline-event').removeClass('threaded')
+                    $('[component="post/footer"]').removeClass('threaded');
+                }
+                // Store the checkbox state in localStorage
+                localStorage.setItem('enableThreadingState', isChecked);
+            });
+            // Check for changes in the checkbox state when the page loads
+            $('#enableThreading').trigger('change');
+        }
+    });
+}
+
+$(window).on('action:ajaxify.end', function (data) {
+    threaded();
+});
+
+$(window).on('action:posts.edited', function (data) {
+    threaded();
+});
+
+$(window).on('action:posts.loaded', function (data) {
+    threaded();
+});
