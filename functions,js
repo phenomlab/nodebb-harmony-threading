@@ -11,6 +11,8 @@ function threaded() {
                     <label class=" d-none d-md-inline fw-semibold" for="enableThreading"><i class="fa fa-fw fa-bars-staggered right"></i></label> \
                 </div></form></div>');
                 $('.topic .sticky-tools ul .hidden-xs').append(threadView);
+                // If you have browsing users plugin, comment out the above line and uncomment the one below
+                //$('.topic .sticky-tools ul [component="topic/browsing-users"]:last-of-type').append(threadView);
                 // Check if there's a stored state for the checkbox and update it
                 var storedState = localStorage.getItem('enableThreadingState');
                 if (storedState === 'true') {
@@ -20,6 +22,7 @@ function threaded() {
             // Toggle the class 'threaded' on or off when the checkbox changes state
             $('#enableThreading').on('change', function () {
                 var isChecked = $(this).is(':checked');
+                var theTooltip = isChecked ? "Disable Threading" : "Enable Threading"; // Update tooltip message
                 if (isChecked) {
                     console.log('Thread view is active.');
                     $('ul[component="topic"]').addClass('threaded');
@@ -48,6 +51,13 @@ function threaded() {
                 }
                 // Store the checkbox state in localStorage
                 localStorage.setItem('enableThreadingState', isChecked);
+                
+                                // Update the tooltip title
+                $(this).attr('data-original-title', theTooltip).tooltip('dispose').tooltip({
+                    placement: 'bottom',
+                    title: theTooltip,
+                    trigger: 'hover'
+                });
             });
             // Check for changes in the checkbox state when the page loads
             $('#enableThreading').trigger('change');
